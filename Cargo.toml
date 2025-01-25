@@ -1,0 +1,13 @@
+[package]
+name = "monitorizador_novedades_el_corte_ingles"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+futures = "0.3.31"
+regex = "1.11.1"
+reqwest = { version = "0.12.12", features = ["cookies", "json"] }
+rusqlite = { version = "0.33.0", features = ["bundled"] }
+serde = { version = "1.0.217", features = ["derive"] }
+serde_json = "1.0.137"
+tokio = { version = "1.43.0", features = ["full"] }
