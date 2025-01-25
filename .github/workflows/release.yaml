@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 env:
-  CRATE_NAME: ivoox_podcast_mp3
+  CRATE_NAME: monitorizador_novedades_el_corte_ingles
   GITHUB_TOKEN: ${{ github.token }}
   RUST_BACKTRACE: 1
 
@@ -24,18 +24,18 @@ jobs:
           - os_name: Linux-x86_64
             os: ubuntu-20.04
             target: x86_64-unknown-linux-musl
-            bin: ivoox_podcast_mp3
-            name: ivoox_podcast_mp3-Linux-x86_64-musl.tar.gz
+            bin: monitorizador_novedades_el_corte_ingles
+            name: monitorizador_novedades_el_corte_ingles-Linux-x86_64-musl.tar.gz
           - os_name: Windows-x86_64
             os: windows-latest
             target: x86_64-pc-windows-msvc
-            bin: ivoox_podcast_mp3.exe
-            name: ivoox_podcast_mp3-Windows-x86_64.zip
+            bin: monitorizador_novedades_el_corte_ingles.exe
+            name: monitorizador_novedades_el_corte_ingles-Windows-x86_64.zip
           - os_name: macOS-x86_64
             os: macOS-latest
             target: x86_64-apple-darwin
-            bin: ivoox_podcast_mp3
-            name: ivoox_podcast_mp3-Darwin-x86_64.tar.gz
+            bin: monitorizador_novedades_el_corte_ingles
+            name: monitorizador_novedades_el_corte_ingles-Darwin-x86_64.tar.gz
         toolchain:
           - stable
     steps:
@@ -74,8 +74,8 @@ jobs:
       - name: Publish release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ivoox_podcast_mp3-${{ matrix.platform.os_name }}
-          path: "ivoox_podcast_mp3-*"
+          name: monitorizador_novedades_el_corte_ingles-${{ matrix.platform.os_name }}
+          path: "monitorizador_novedades_el_corte_ingles-*"
         if: matrix.toolchain == 'stable' && github.ref == 'refs/tags/test-release'
       - name: Generate SHA-256
         run: shasum -a 256 ${{ matrix.platform.name }}
@@ -88,5 +88,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           draft: false
-          files: "ivoox_podcast_mp3-*"
+          files: "monitorizador_novedades_el_corte_ingles-*"
         if: matrix.toolchain == 'stable' && startsWith( github.ref, 'refs/tags/v' )
