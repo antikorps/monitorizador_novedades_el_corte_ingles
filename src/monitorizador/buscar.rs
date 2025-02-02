@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, time::Duration};
 
 use futures::future::join_all;
 use regex::Regex;
@@ -14,7 +14,7 @@ async fn visitar_url_extraer_productos(
     exp_reg_data_layer: &Regex,
 ) -> Result<ProductosECI, String> {
     println!("INFO: Buscando productos en {}...", url);
-    let r = match cliente_http.get(url).send().await {
+    let r = match cliente_http.get(url).timeout(Duration::from_secs(7)).send().await {
         Err(error) => {
             let mensaje_error = format!("ha fallado la petición a {} {}", url, error);
             return Err(mensaje_error);

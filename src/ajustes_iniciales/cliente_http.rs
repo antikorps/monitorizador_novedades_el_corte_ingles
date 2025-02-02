@@ -1,4 +1,5 @@
 use core::panic;
+use std::time::Duration;
 
 use regex::Regex;
 use reqwest::header::{HeaderMap, USER_AGENT};
@@ -35,6 +36,7 @@ fn crear_cliente() -> Client {
     ClientBuilder::new()
         .cookie_store(true)
         .default_headers(cabeceras)
+        .timeout(Duration::from_secs(7))
         .build()
         .expect("no se ha podido crear el cliente_http")
 }
@@ -52,7 +54,8 @@ trait Autentificar {
 impl Autentificar for Client {
     async fn autentificar(&self) {
         let r = self
-            .get("https://www.elcorteingles.es/electronica/reacondicionados/videojuegos/consolas/")
+            .get("https://www.elcorteingles.es/electronica/reacondicionados/ordenadores-y-accesorios/ordenadores/")
+            .timeout(Duration::from_secs(7))
             .send()
             .await
             .expect("ERROR FATAL: ha fallado la petición base de autentificación");
